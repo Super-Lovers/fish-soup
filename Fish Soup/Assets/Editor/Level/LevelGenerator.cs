@@ -55,7 +55,7 @@ public class LevelGenerator
     {
         int i = 0;
         int j = 0;
-        int k = 0;
+        //int k = 0;
 
         for (i = 0; i < levelGrid.levelContainer.GetGridArray().GetLength(0); i++)
         {

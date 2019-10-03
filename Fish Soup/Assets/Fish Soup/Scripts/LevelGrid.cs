@@ -73,7 +73,7 @@ public class LevelGrid : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.3f);
+        Gizmos.color = new Color(1f, 1f, 1f, 0.1f);
         DrawGrid();
     }
 
