@@ -7,6 +7,9 @@ public class LevelGrid : MonoBehaviour
     // Grid parameters
     public LevelSettings levelSettings = null;
 
+    // Level parameters
+    public LevelContainer levelContainer = null;
+
     public static LevelGrid GetInstance()
     {
         return (Instance ?? (Instance = GameObject.FindObjectOfType<LevelGrid>()));
@@ -70,7 +73,7 @@ public class LevelGrid : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(0, 1, 0, 0.1f);
+        Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.3f);
         DrawGrid();
     }
 

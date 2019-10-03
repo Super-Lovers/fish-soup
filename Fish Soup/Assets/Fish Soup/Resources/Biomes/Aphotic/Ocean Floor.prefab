@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1609665154002673062}
   - component: {fileID: 1609665154002673063}
   m_Layer: 0
-  m_Name: Test Cube
+  m_Name: Ocean Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
