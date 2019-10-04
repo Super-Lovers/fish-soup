@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
-public class LevelGrid : MonoBehaviour
+public class LevelGridView : MonoBehaviour
 {
-    public static LevelGrid Instance = null;
+    public static LevelGridView Instance = null;
 
     // Grid parameters
-    public LevelSettings levelSettings = null;
+    public LevelSettingsModel levelSettings = null;
 
     // Level parameters
-    public LevelContainer levelContainer = null;
+    public LevelContainerController levelContainer = null;
 
-    public static LevelGrid GetInstance()
+    public static LevelGridView GetInstance()
     {
-        return (Instance ?? (Instance = GameObject.FindObjectOfType<LevelGrid>()));
+        return (Instance ?? (Instance = GameObject.FindObjectOfType<LevelGridView>()));
     }
 
     public void DrawGrid()

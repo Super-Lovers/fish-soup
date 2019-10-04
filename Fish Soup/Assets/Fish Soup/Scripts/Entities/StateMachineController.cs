@@ -1,4 +1,4 @@
-﻿public class StateMachine : IStateMachine
+﻿public class StateMachineController : IStateMachine
 {
     private State state = State.Idle;
 

@@ -1,4 +1,4 @@
-﻿public class Properties : IProperties
+﻿public class PropertiesModel : IProperties
 {
     private string label = string.Empty;
     private int health = 100;

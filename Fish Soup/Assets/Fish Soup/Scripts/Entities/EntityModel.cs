@@ -1,16 +1,10 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class Entity : MonoBehaviour
+public class EntityModel : MonoBehaviour
 {
     private IStateMachine stateMachine = null;
     private IProperties properties = null;
-
-    private void Start()
-    {
-        Debug.Log(properties.GetLabel());
-        Debug.Log(stateMachine.GetState());
-    }
 
     [Inject]
     private void Construct(

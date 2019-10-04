@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public class LevelGenerator
 {
-    private static LevelGrid levelGrid = null;
+    private static LevelGridView levelGrid = null;
     private static Dictionary<string, List<GameObject>> biomeLibraries = new Dictionary<string, List<GameObject>>();
 
     private static Transform oceanFloorContainer = null;
+    private static Transform waterContainer = null;
 
     [MenuItem("Level Generator/Generate Level")]
     public static void GenerateGrid()
@@ -15,12 +16,12 @@ public class LevelGenerator
         LoadBiomeLibraries();
 
         levelGrid =
-            GameObject.FindObjectOfType<LevelGrid>();
+            GameObject.FindObjectOfType<LevelGridView>();
 
         ClearLevel();
         if (levelGrid.levelContainer == null)
         {
-            levelGrid.levelContainer = new LevelContainer();
+            levelGrid.levelContainer = new LevelContainerController();
         }
         string[,,] grid = levelGrid.levelContainer.GetGridArray();
 
@@ -39,6 +40,8 @@ public class LevelGenerator
                 InstantiateTile(grid[i, j, 0], positionOfTile);
                 for (k = 0; k < grid.GetLength(2); k++)
                 {
+                    InstantiateTile(grid[i, j, k], positionOfTile);
+
                     positionOfTile.y += levelGrid.levelSettings.tileSize.y;
                 }
 
@@ -53,17 +56,27 @@ public class LevelGenerator
 
     private static void SetupLevel()
     {
-        int i = 0;
-        int j = 0;
-        //int k = 0;
-
-        for (i = 0; i < levelGrid.levelContainer.GetGridArray().GetLength(0); i++)
+        for (int i = 0; i < levelGrid.levelContainer.GetGridArray().GetLength(0); i++)
         {
-            levelGrid.levelContainer.GetGridArray()[i, 0, 0] = "Ocean Floor";
-
-            for (j = 0; j < levelGrid.levelContainer.GetGridArray().GetLength(1); j++)
+            for (int j = 0; j < levelGrid.levelContainer.GetGridArray().GetLength(1); j++)
             {
-                levelGrid.levelContainer.GetGridArray()[i, j, 0] = "Ocean Floor";
+                for (int k = 0; k < levelGrid.levelContainer.GetGridArray().GetLength(2); k++)
+                {
+                    levelGrid.levelContainer.GetGridArray()[i, j, k] = "Water";
+                }
+            }
+        }
+
+        int x = 0;
+        int y = 0;
+
+        for (x = 0; x < levelGrid.levelContainer.GetGridArray().GetLength(0); x++)
+        {
+            levelGrid.levelContainer.GetGridArray()[x, 0, 0] = "Ocean Floor";
+
+            for (y = 0; y < levelGrid.levelContainer.GetGridArray().GetLength(1); y++)
+            {
+                levelGrid.levelContainer.GetGridArray()[x, y, 0] = "Ocean Floor";
             }
         }
     }
@@ -132,11 +145,24 @@ public class LevelGenerator
 
         // Might not be permanent, but I am leaving it for now for
         // the sake of clarity at the start of the project hierarchy.
-        if (oceanFloorContainer == null)
+        switch (tileAssetName + "s")
         {
-            oceanFloorContainer = new GameObject(tileAssetName + "s").transform;
-            oceanFloorContainer.transform.SetParent(levelGrid.transform);
+            case "Ocean Floors":
+                if (oceanFloorContainer == null)
+                {
+                    oceanFloorContainer = new GameObject(tileAssetName + "s").transform;
+                    oceanFloorContainer.transform.SetParent(levelGrid.transform);
+                }
+                break;
+            case "Waters":
+                if (waterContainer == null)
+                {
+                    waterContainer = new GameObject(tileAssetName + "s").transform;
+                    waterContainer.transform.SetParent(levelGrid.transform);
+                }
+                break;
         }
+
 
         if (tileObj != null)
         {

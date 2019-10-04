@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [ExecuteInEditMode]
-public class SnapToLevelGrid : MonoBehaviour
+public class SnapToLevelGridController : MonoBehaviour
 {
     public MeshRenderer meshRenderer = null;
     public Material outOfBoundsMaterial = null;
@@ -11,9 +11,9 @@ public class SnapToLevelGrid : MonoBehaviour
     {
         if (transform.hasChanged)
         {
-            transform.position = LevelGrid.GetInstance().SnapToGridCoordinates(transform.position);
+            transform.position = LevelGridView.GetInstance().SnapToGridCoordinates(transform.position);
 
-            if (LevelGrid.GetInstance().IsInBoundaries(transform.position))
+            if (LevelGridView.GetInstance().IsInBoundaries(transform.position))
             {
                 meshRenderer.material = inBoundsMaterial;
             }
