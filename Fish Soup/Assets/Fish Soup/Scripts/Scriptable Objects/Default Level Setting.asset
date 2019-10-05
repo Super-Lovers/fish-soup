@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f028da9a3f24e448e499c7a3f189c2, type: 3}
   m_Name: Default Level Setting
   m_EditorClassIdentifier: 
+  biome: 0
   gridSize: {x: 5, y: 5, z: 5}
   tileSize: {x: 0.64, y: 0.32, z: 0.64}
