@@ -9,7 +9,7 @@ public class LevelEntitiesInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInstance(playerEntity).AsSingle();
-        Container.BindInterfacesTo<SharkFactory>().AsSingle();
+        Container.Bind<SharkFactory>().AsSingle();
         Container.BindFactory<SharkEntity, SharkEntity.Factory>().FromComponentInNewPrefab(sharkEntity);
         Container.Bind<IStateMachine>().To<StateMachineController>().AsSingle();
     }

@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public class LevelGenerator
 {
+    private static GameObject levelPrefab = null;
     private static LevelGridView levelGrid = null;
     private static Dictionary<string, List<GameObject>> biomeLibraries = new Dictionary<string, List<GameObject>>();
 
+    private static int initialChildCount = 0;
     private static Transform oceanFloorContainer = null;
     private static Transform waterContainer = null;
 
@@ -17,6 +19,10 @@ public class LevelGenerator
 
         levelGrid =
             GameObject.FindObjectOfType<LevelGridView>();
+        if (initialChildCount == 0)
+        {
+            initialChildCount = levelGrid.transform.childCount;
+        }
 
         ClearLevel();
         if (levelGrid.levelContainer == null)
@@ -176,7 +182,7 @@ public class LevelGenerator
     {
         // We start from 1 because we want to avoid deleting the camera container.
         List<GameObject> children = new List<GameObject>();
-        for (int i = 1; i < levelGrid.transform.childCount; i++)
+        for (int i = initialChildCount; i < levelGrid.transform.childCount; i++)
         {
             children.Add(levelGrid.transform.GetChild(i).gameObject);
         }
@@ -185,5 +191,19 @@ public class LevelGenerator
         {
             GameObject.DestroyImmediate(obj);
         }
+    }
+
+    [MenuItem("Level Generator/Generate New Scene")]
+    [System.Obsolete]
+    public static void GenerateNewScene()
+    {
+        EditorApplication.SaveCurrentSceneIfUserWantsTo();
+        if (levelPrefab == null)
+        {
+            levelPrefab = (GameObject)Resources.Load("LevelView");
+        }
+        EditorApplication.NewEmptyScene();
+        GameObject level = GameObject.Instantiate(levelPrefab);
+        level.name = levelPrefab.name;
     }
 }

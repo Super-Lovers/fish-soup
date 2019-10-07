@@ -223,5 +223,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7133637635333023860, guid: a0d01216b4d867f40b005479e0aace0f,
+        type: 3}
+      propertyPath: sharkEntity
+      value: 
+      objectReference: {fileID: 6285858910752087493, guid: 5cac4f40bd62d994b80c42f258fe1f4e,
+        type: 3}
+    - target: {fileID: 7133637635333023860, guid: a0d01216b4d867f40b005479e0aace0f,
+        type: 3}
+      propertyPath: playerEntity
+      value: 
+      objectReference: {fileID: 4190231732077725381}
+    - target: {fileID: 8503979117748904752, guid: a0d01216b4d867f40b005479e0aace0f,
+        type: 3}
+      propertyPath: m_Name
+      value: Factories
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0d01216b4d867f40b005479e0aace0f, type: 3}
+--- !u!114 &4190231732077725381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6868636744604841240, guid: a0d01216b4d867f40b005479e0aace0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4190231732077725380}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dde260178ee2e4ea9893611c578036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
