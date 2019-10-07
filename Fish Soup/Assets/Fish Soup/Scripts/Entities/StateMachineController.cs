@@ -1,4 +1,5 @@
-﻿public class StateMachineController : IStateMachine
+﻿[System.Serializable]
+public class StateMachineController : IStateMachine
 {
     private State state = State.Idle;
 

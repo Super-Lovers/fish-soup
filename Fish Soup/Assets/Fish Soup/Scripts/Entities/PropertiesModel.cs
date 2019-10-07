@@ -1,7 +1,14 @@
-﻿public class PropertiesModel : IProperties
+﻿[System.Serializable]
+public class PropertiesModel : IProperties
 {
-    private string label = string.Empty;
-    private int health = 100;
+    [UnityEngine.SerializeField] private string label = string.Empty;
+    [UnityEngine.SerializeField] private int health = 0;
+
+    public PropertiesModel(EntityPropertiesModel model)
+    {
+        label = model.label;
+        health = model.health;
+    }
 
     public int GetHealth()
     {

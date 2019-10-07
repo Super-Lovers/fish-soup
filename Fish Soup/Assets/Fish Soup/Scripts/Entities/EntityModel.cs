@@ -1,17 +1,29 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
+using UnityEngine;
 
-public class EntityModel : MonoBehaviour
+public abstract class EntityModel : MonoBehaviour
 {
     private IStateMachine stateMachine = null;
-    private IProperties properties = null;
+
+    [SerializeField]
+    private EntityPropertiesModel entityPropertiesModel = null;
+    private PropertiesModel properties = null;
 
     [Inject]
     private void Construct(
-        IProperties properties,
         IStateMachine stateMachine)
     {
-        this.properties = properties;
         this.stateMachine = stateMachine;
+        properties = new PropertiesModel(entityPropertiesModel);
+    }
+
+    public IStateMachine GetStateMachine()
+    {
+        return stateMachine;
+    }
+
+    public PropertiesModel GetProperties()
+    {
+        return properties;
     }
 }
