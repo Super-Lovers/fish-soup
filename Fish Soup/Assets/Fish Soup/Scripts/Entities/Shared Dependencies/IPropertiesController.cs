@@ -2,7 +2,5 @@
 {
     string GetLabel();
     void SetLabel(string label);
-
-    int GetHealth();
-    void SetHealth(int health);
+    IHealthController GetHealthController();
 }

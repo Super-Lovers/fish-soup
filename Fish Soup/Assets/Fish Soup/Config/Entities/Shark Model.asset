@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aec6b2acd507f4a48a1c0878d2ae21cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c8bf8303d7eb0c4a866a4680bda7dab, type: 3}
   m_Name: Shark Model
   m_EditorClassIdentifier: 
   label: Shark
-  health: 30
+  healthController:
+    health: 5
+    maxHealth: 5
+  combatController:
+    damage: 1

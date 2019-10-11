@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4390208824710957997}
   - component: {fileID: 6108385275625505258}
   m_Layer: 0
-  m_Name: PlayerEntity 1
+  m_Name: PlayerEntity
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,8 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dde260178ee2e4ea9893611c578036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityPropertiesModel: {fileID: 11400000, guid: c405c844c5c8a6c488a7ec8aea8e5b08,
-    type: 2}
+  propertiesModel: {fileID: 11400000, guid: c405c844c5c8a6c488a7ec8aea8e5b08, type: 2}
 --- !u!1 &7356362442830336052
 GameObject:
   m_ObjectHideFlags: 0

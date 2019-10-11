@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Player Model
   m_EditorClassIdentifier: 
   label: Player
-  health: 100
+  healthController:
+    health: 10
+    maxHealth: 10
