@@ -1,6 +1,6 @@
 ﻿public abstract class EntityModel : UnityEngine.MonoBehaviour
 {
-    public virtual object GetProperties()
+    public virtual IProperties GetProperties()
     {
         throw new System.NotImplementedException();
     }

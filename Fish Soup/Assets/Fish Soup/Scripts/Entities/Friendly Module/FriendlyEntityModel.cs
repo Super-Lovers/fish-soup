@@ -4,8 +4,13 @@
     private PropertiesModel propertiesModel;
     private FriendlyPropertiesController propertiesController;
 
-    public override object GetProperties()
+    public override IProperties GetProperties()
     {
-        return propertiesController;
+        if (propertiesController == null)
+        {
+            FriendlyPropertiesFactory factory = new FriendlyPropertiesFactory();
+            this.propertiesController = factory.Create(this.propertiesModel);
+        }
+        return this.propertiesController;
     }
 }

@@ -1,7 +1,1 @@
-﻿public class PlayerController : FoeEntityModel {
-
-    private void Start()
-    {
-        FoePropertiesController prop = (FoePropertiesController)GetProperties();
-    }
-}
+﻿public class PlayerController : FoeEntityModel { }

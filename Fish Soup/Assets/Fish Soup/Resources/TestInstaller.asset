@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde82787688411641b21a498d7d2cab6, type: 3}
+  m_Name: TestInstaller
+  m_EditorClassIdentifier: 
+  playerEntity: {fileID: 6108385275625505258, guid: 88c8855e367ca144a88a082022d93b5f,
+    type: 3}
+  sharkEntity: {fileID: 6285858910752087493, guid: 5cac4f40bd62d994b80c42f258fe1f4e,
+    type: 3}
+  NPCEntity: {fileID: 6285858910752087493, guid: 009b73f2748af0743bf1e47f364f9041,
+    type: 3}

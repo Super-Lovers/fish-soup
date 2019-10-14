@@ -10,4 +10,9 @@ public class SharkFactory : MonoBehaviour
     {
         this.sharkFactory = sharkFactory;
     }
+
+    public SharkEntity.Factory GetFactory()
+    {
+        return this.sharkFactory;
+    }
 }

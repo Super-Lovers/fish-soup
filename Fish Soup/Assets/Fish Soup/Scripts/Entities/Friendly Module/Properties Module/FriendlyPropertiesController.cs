@@ -28,4 +28,9 @@
     {
         this.label = label;
     }
+
+    public ICombatController GetCombatController()
+    {
+        throw new System.NotImplementedException();
+    }
 }

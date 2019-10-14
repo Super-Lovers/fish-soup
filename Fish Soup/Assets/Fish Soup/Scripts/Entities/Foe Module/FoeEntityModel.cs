@@ -36,7 +36,7 @@ public abstract class FoeEntityModel : EntityModel
         return this.killableController;
     }
 
-    public override object GetProperties()
+    public override IProperties GetProperties()
     {
         return propertiesController;
     }

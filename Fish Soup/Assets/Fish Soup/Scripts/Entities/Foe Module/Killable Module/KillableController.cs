@@ -19,7 +19,6 @@
         if (validateBlow == true)
         {
             healthController.SetHealth(healthController.GetHealth() - damage);
-            UnityEngine.Debug.Log(healthController.GetHealth() + " - " + damage + " = " + (healthController.GetHealth() - damage));
         }
         else
         {

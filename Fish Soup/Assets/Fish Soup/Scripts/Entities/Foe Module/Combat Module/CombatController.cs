@@ -13,4 +13,9 @@ public class CombatController : ICombatController
     {
         return this.damage;
     }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
 }
