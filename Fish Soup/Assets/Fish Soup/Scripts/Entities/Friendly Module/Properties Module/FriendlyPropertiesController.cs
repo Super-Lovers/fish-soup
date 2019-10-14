@@ -6,11 +6,13 @@
     // Dependancies
     private IHealthController healthController;
 
-    public FriendlyPropertiesController(FriendlyPropertiesModel properties)
+    public FriendlyPropertiesController(PropertiesModel properties)
     {
         this.label = properties.label;
         this.healthController = properties.healthController;
     }
+
+    public FriendlyPropertiesController() { }
 
     public IHealthController GetHealthController()
     {

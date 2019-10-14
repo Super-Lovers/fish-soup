@@ -7,12 +7,16 @@
     private IHealthController healthController;
     private ICombatController combatController;
 
-    public FoePropertiesController(FoePropertiesModel properties, CombatController combatController)
+    public FoePropertiesController(
+        PropertiesModel properties,
+        CombatController combatController)
     {
         this.label = properties.label;
         this.healthController = properties.healthController;
         this.combatController = combatController;
     }
+
+    public FoePropertiesController() { }
 
     public IHealthController GetHealthController()
     {

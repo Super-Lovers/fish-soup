@@ -1,12 +1,9 @@
 ﻿public class DeathController : IDeathController
 {
-    public void Die(EntityModel entity)
+    public void Die(FoeEntityModel entity)
     {
-        FoeEntityModel foe = (FoeEntityModel)entity;
-        FoePropertiesController foeProperties = (FoePropertiesController)foe.GetProperties();
-        if (foe)
-        {
-            UnityEngine.Debug.Log(foeProperties.GetLabel() + " has fallen!");
-        }
+        FoePropertiesController foeProperties = (FoePropertiesController)entity.GetProperties();
+
+        UnityEngine.Debug.Log(foeProperties.GetLabel() + " has fallen!");
     }
 }

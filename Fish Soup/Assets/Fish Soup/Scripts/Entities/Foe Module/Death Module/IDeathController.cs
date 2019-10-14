@@ -1,4 +1,4 @@
 ﻿public interface IDeathController
 {
-    void Die(EntityModel entity);
+    void Die(FoeEntityModel entity);
 }

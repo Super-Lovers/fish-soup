@@ -2,7 +2,7 @@
 
 public abstract class FoeEntityModel : EntityModel
 {
-    private FriendlyEntityModel player;
+    private PlayerController player;
 
     public FoePropertiesController propertiesController;
     [UnityEngine.SerializeField]
@@ -13,12 +13,12 @@ public abstract class FoeEntityModel : EntityModel
     [Inject]
     private void Construct(
         IStateMachine stateMachine,
-        IKillableController killableController,
-        FriendlyEntityModel player)
+        PlayerController player)
     {
+        PropertiesFactory factory = new FoePropertiesFactory();
         this.player = player;
         this.stateMachine = stateMachine;
-        this.killableController = killableController;
+        this.propertiesController = factory.Create(propertiesModel, propertiesModel.combatController);
     }
 
     public IStateMachine GetStateMachine()
@@ -28,6 +28,11 @@ public abstract class FoeEntityModel : EntityModel
 
     public IKillableController GetKillableController()
     {
+        if (killableController == null)
+        {
+            KillableControllerFactory factory = new KillableControllerFactory();
+            this.killableController = factory.Create(this);
+        }
         return this.killableController;
     }
 

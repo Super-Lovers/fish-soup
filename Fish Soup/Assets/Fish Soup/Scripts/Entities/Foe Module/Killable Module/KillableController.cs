@@ -3,9 +3,9 @@
     private FoeEntityModel entity;
     private IDeathController deathController;
 
-    public KillableController(FoeEntityModel entity, IDeathController deathController)
+    public KillableController(
+        FoeEntityModel entity)
     {
-        this.deathController = deathController;
         this.entity = entity;
     }
 
@@ -19,10 +19,11 @@
         if (validateBlow == true)
         {
             healthController.SetHealth(healthController.GetHealth() - damage);
+            UnityEngine.Debug.Log(healthController.GetHealth() + " - " + damage + " = " + (healthController.GetHealth() - damage));
         }
         else
         {
-            deathController.Die(entity);
+            GetDeathController().Die(entity);
         }
     }
 
@@ -36,5 +37,15 @@
         {
             return false;
         }
+    }
+
+    public IDeathController GetDeathController()
+    {
+        if (this.deathController == null)
+        {
+            DeathControllerFactory factory = new DeathControllerFactory();
+            this.deathController = factory.Create();
+        }
+        return this.deathController;
     }
 }
