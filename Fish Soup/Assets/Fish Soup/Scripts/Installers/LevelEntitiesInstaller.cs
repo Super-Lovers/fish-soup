@@ -18,6 +18,9 @@ public class LevelEntitiesInstaller : MonoInstaller
         // Friendly Module Injection
         Container.Bind<FriendlyPropertiesController>().ToSelf().AsTransient();
 
+        // Foe and Friendly Shared Module Injections
+        Container.Bind<MovementController>().ToSelf().AsTransient();
+
         // Factories
         Container.Bind<SharkFactory>().AsSingle();
         Container.BindFactory<SharkEntity, SharkEntity.Factory>().FromComponentInNewPrefab(sharkEntity);
