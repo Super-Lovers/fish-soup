@@ -10,7 +10,7 @@ public class FaceRotationController : MonoBehaviour
 
     private void Update()
     {
-        if (transform.hasChanged)
+        if (transform.hasChanged && Camera.main != null)
         {
             RotateView();
         }

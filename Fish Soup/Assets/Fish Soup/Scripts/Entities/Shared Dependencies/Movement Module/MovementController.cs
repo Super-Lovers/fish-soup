@@ -4,8 +4,6 @@ public class MovementController : MonoBehaviour
 {
     [Range(0, 100)]
     [SerializeField] private float speed = 0f;
-    [Range(0, 100)]
-    [SerializeField] private float maxSpeed = 0f;
 
     // Dependancies
     private Rigidbody rigidBody = null;
@@ -17,18 +15,30 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 newCoordinates = new Vector3(
-            GetHorizontalInputAxis(), 0, GetVerticalInputAxis());
+        if (Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.S) ||
+            Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.D) ||
+            Input.GetKey(KeyCode.UpArrow) ||
+            Input.GetKey(KeyCode.DownArrow) ||
+            Input.GetKey(KeyCode.LeftArrow) ||
+            Input.GetKey(KeyCode.RightArrow))
+        {
+            float z = transform.position.z + (GetHorizontalInputAxis()) * (speed / 1000);
+            float x = transform.position.x + (GetDepthInputAxis()) * (speed / 1000);
+            Vector3 newCoordinates = new Vector3(
+                x, 0, z);
 
-        rigidBody.MovePosition(newCoordinates);
+            rigidBody.MovePosition(newCoordinates);
+        }
     }
 
     private float GetHorizontalInputAxis()
     {
-        return Input.GetAxis("Horizontal");
+        return Input.GetAxis("Horizontal") * -1;
     }
 
-    private float GetVerticalInputAxis()
+    private float GetDepthInputAxis()
     {
         return Input.GetAxis("Vertical");
     }
@@ -37,12 +47,6 @@ public class MovementController : MonoBehaviour
     {
         return new Vector2(
             GetHorizontalInputAxis(),
-            GetVerticalInputAxis());
-    }
-
-    private float ConvertAxisToRealSpeed(float axis)
-    {
-        float newSpeed = (axis * speed) * Time.deltaTime;
-        return Mathf.Clamp(newSpeed, 0, this.maxSpeed);
+            GetDepthInputAxis());
     }
 }

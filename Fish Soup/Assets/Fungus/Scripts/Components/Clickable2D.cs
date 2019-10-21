@@ -13,6 +13,9 @@ namespace Fungus
     /// </summary>
     public class Clickable2D : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [Tooltip("Adjusts distance from player for it to be interactable")]
+        [SerializeField] protected float clickableRadius = 2.5f;
+
         [Tooltip("Is object clicking enabled")]
         [SerializeField] protected bool clickEnabled = true;
 
@@ -21,6 +24,13 @@ namespace Fungus
 
         [Tooltip("Use the UI Event System to check for clicks. Clicks that hit an overlapping UI object will be ignored. Camera must have a PhysicsRaycaster component, or a Physics2DRaycaster for 2D colliders.")]
         [SerializeField] protected bool useEventSystem;
+
+        private PlayerController player = null;
+
+        private void Start()
+        {
+            player = FindObjectOfType<PlayerController>();
+        }
 
         protected virtual void ChangeCursor(Texture2D cursorTexture)
         {
@@ -32,9 +42,22 @@ namespace Fungus
             Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         }
 
+        private float DistanceFromPlayer()
+        {
+            player = FindObjectOfType<PlayerController>();
+            if (player != null)
+            {
+                return Vector3.Distance(player.transform.position, transform.position);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         protected virtual void DoPointerClick()
         {
-            if (!clickEnabled)
+            if (!clickEnabled || DistanceFromPlayer() > clickableRadius)
             {
                 return;
             }
@@ -127,5 +150,18 @@ namespace Fungus
         }
 
         #endregion
+
+        private void OnDrawGizmos()
+        {
+            if (DistanceFromPlayer() < clickableRadius)
+            {
+                Gizmos.color = Color.blue;
+            }
+            else
+            {
+                Gizmos.color = Color.red;
+            }
+            Gizmos.DrawWireSphere(transform.position, clickableRadius);
+        }
     }
 }

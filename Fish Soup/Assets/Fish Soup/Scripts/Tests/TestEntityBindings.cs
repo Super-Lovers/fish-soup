@@ -5,7 +5,7 @@ using UnityEngine;
 [TestFixture]
 public class TestFriendlyEntityBindings : ZenjectUnitTestFixture
 {
-    private NPCEntity npc;
+    private NPCEntity npc = null;
 
     [SetUp]
     public void InstallBindings()
@@ -21,7 +21,7 @@ public class TestFriendlyEntityBindings : ZenjectUnitTestFixture
     {
         GameObject npc = Container.InstantiatePrefabResource("Prefabs/Entities/NPCEntity");
         this.npc = npc.GetComponent<NPCEntity>();
-        Assert.NotNull(npc.GetComponent<NPCEntity>().GetProperties());
+        Assert.NotNull(this.npc.GetProperties());
     }
 
     [Test]
