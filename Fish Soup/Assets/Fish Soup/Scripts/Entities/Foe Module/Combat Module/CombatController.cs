@@ -1,8 +1,16 @@
-﻿[System.Serializable]
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
 public class CombatController : ICombatController
 {
-    [UnityEngine.SerializeField]
-    private int damage;
+    private AbilitiesController abilitiesController = null;
+
+    [SerializeField]
+    private int damage = 0;
+
+    [SerializeField]
+    private List<AbilityModel> abilities = new List<AbilityModel>();
 
     public void DamageEntity(FoeEntityModel entity)
     {
@@ -11,11 +19,24 @@ public class CombatController : ICombatController
 
     public int GetDamage()
     {
-        return this.damage;
+        return damage;
     }
 
     public void SetDamage(int damage)
     {
         this.damage = damage;
+    }
+
+    public AbilitiesController GetAbilitiesController()
+    {
+        // TODO: Homework on zeject component in local object hierarchy injection
+        // Most likely temporary until I try to understand why
+        // this can't work for me using ZenJect.
+        if (abilitiesController == null)
+        {
+            abilitiesController = new AbilitiesController();
+        }
+
+        return abilitiesController;
     }
 }

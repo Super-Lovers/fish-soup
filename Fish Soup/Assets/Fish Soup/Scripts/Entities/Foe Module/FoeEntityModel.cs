@@ -2,13 +2,13 @@
 
 public abstract class FoeEntityModel : EntityModel
 {
-    private PlayerController player;
+    private PlayerController player = null;
 
-    public FoePropertiesController propertiesController;
+    public FoePropertiesController propertiesController = null;
     [UnityEngine.SerializeField]
-    private FoePropertiesModel propertiesModel;
-    private IStateMachine stateMachine;
-    private IKillableController killableController;
+    private FoePropertiesModel propertiesModel = null;
+    private IStateMachine stateMachine = null;
+    private IKillableController killableController = null;
 
     [Inject]
     private void Construct(

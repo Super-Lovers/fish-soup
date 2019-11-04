@@ -189,6 +189,15 @@ public class TestFoeEntityCombatBehaviour : ZenjectUnitTestFixture
     }
 
     [Test]
+    public void GetAbilitiesController()
+    {
+        SharkEntity.Factory factory = Container.Resolve<SharkEntity.Factory>();
+
+        SharkEntity shark = factory.Create();
+        Assert.IsNotNull(shark.GetProperties().GetCombatController().GetAbilitiesController());
+    }
+
+    [Test]
     public void GetFoeDamage()
     {
         SharkEntity.Factory factory = Container.Resolve<SharkEntity.Factory>();

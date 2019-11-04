@@ -23,6 +23,10 @@ public class TestInstaller : ScriptableObjectInstaller<TestInstaller>
         // Friendly Module Injection
         Container.Bind<FriendlyPropertiesController>().ToSelf().AsTransient();
 
+        // Shared gameObject modules
+        //Container.Bind<Animator>().FromComponentInChildren();
+        //Container.Bind<AbilitiesController>().ToSelf().AsTransient();
+
         // Factories
         Container.Bind<SharkFactory>().AsSingle();
         Container.BindFactory<SharkEntity, SharkEntity.Factory>().FromComponentInNewPrefab(sharkEntity);

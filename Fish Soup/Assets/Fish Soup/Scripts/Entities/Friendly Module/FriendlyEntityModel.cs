@@ -1,8 +1,8 @@
 ﻿public abstract class FriendlyEntityModel : EntityModel
 {
     [UnityEngine.SerializeField]
-    private PropertiesModel propertiesModel;
-    private FriendlyPropertiesController propertiesController;
+    private PropertiesModel propertiesModel = null;
+    private FriendlyPropertiesController propertiesController = null;
 
     public override IProperties GetProperties()
     {
