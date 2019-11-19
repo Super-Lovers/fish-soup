@@ -48,7 +48,7 @@ public class TestFriendlyEntityBehaviour : ZenjectUnitTestFixture
     [Test]
     public void GetNPCLabel()
     {
-        Assert.AreEqual("Mac PissPissPiss", this.npc.GetProperties().GetLabel());
+        Assert.AreEqual("Default NPC", this.npc.GetProperties().GetLabel());
     }
 
     [Test]

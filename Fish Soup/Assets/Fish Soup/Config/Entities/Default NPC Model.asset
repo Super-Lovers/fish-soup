@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec6b2acd507f4a48a1c0878d2ae21cc, type: 3}
   m_Name: Default NPC Model
   m_EditorClassIdentifier: 
-  label: Mac PissPissPiss
+  label: Default NPC
   healthController:
-    health: 100
-    maxHealth: 100
+    health: 20
+    maxHealth: 20

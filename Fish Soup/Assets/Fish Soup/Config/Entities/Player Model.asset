@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Player
   healthController:
-    health: 10
-    maxHealth: 10
+    health: 5
+    maxHealth: 5
   combatController:
     damage: 2
     abilities:
