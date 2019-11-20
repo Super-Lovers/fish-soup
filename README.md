@@ -24,6 +24,9 @@
 
 ## 🧐 About <a name="about" />
 
+Fish Soup is a game about a mermaid trying to rescue her girlfriend from the evil merman that kidnapped her. The game was initially concepted for the Yuri Game Jam of 2019 on itch.io, and is currently being developed in Unity. 
+The game will include features such as: an isometric viewpoint, a semi-open world for players to explore, and NPCs that will provide advice to the player.
+
 ## 🔧 Installation <a name="installation" />
 
 You can get the game from this page by looking up in the "**Releases**" tab at the top and downloading the latest archive of the game. After that, you extract the archive anywhere on your device and run the "**.exe**" executable file to start playing.
