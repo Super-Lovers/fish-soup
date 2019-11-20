@@ -1,8 +1,12 @@
 <p align="center">
- <img width=200px height=200px src="http://placekitten.com/g/200/200" alt="Project logo"></a>
+ <img width=800px height=200px src="http://placekitten.com/g/800/200" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Fish Soup</h3>
+<div align="center" style="text-align:center">
+  <img style="display:inline-block" src="https://img.shields.io/badge/platforms-windows%20%7C%20macos%20%7C%20linux-lightgrey" />
+  <img style="display:inline-block" src="https://img.shields.io/badge/status-active-success" />
+</div>
 
 ---
 
@@ -14,8 +18,9 @@
 
 * [About](#about)
 * [Installation](#about)
-* [How To Play ](#how_to_play)
+* [How To Play ](#howToPlay)
 * [Team](#team)
+* [Credits](#credits)
 
 ## 🧐 About <a name="about" />
 
@@ -23,7 +28,7 @@
 
 You can get the game from this page by looking up in the "**Releases**" tab at the top and downloading the latest archive of the game. After that, you extract the archive anywhere on your device and run the "**.exe**" executable file to start playing.
 
-## 🎈 How to play <a name="how_to_play" />
+## 🎈 How to play <a name="howToPlay" />
 
 ## ✍️ Team <a name="team" />
 
@@ -32,4 +37,4 @@ You can get the game from this page by looking up in the "**Releases**" tab at t
 
 Because no designer was present, both of us were responsible for that aspect.
 
-## 🎉 Credits
+## 🎉 Credits <a name="credits" />
