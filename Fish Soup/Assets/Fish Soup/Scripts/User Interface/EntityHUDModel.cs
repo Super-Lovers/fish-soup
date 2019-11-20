@@ -77,7 +77,28 @@ public class EntityHUDModel : MonoBehaviour
     /// </summary>
     public void RefreshAbilities()
     {
-        throw new System.NotImplementedException();
+        List<GameObject> children = new List<GameObject>();
+
+        for (int i = 0; i < abilitiesContainer.transform.childCount; i++)
+        {
+            children.Add(abilitiesContainer.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < children.Count; i++)
+        {
+            Destroy(children[i]);
+        }
+
+        AbilitiesController abilitiesController = properties.GetCombatController().GetAbilitiesController();
+        List<AbilityModel> abilities = abilitiesController.GetAbilities();
+
+        for (int i = 0; i < abilities.Count; i++)
+        {
+            AbilityModel ability = abilities[i];
+            GameObject abilityObj = Instantiate(abilitySlotPrefab, abilitiesContainer.transform);
+            AbilitySlotModel abilitySlotModel = abilityObj.GetComponent<AbilitySlotModel>();
+            abilitySlotModel.SetAbilitySlotDetails(ability.GetAbilityName(), ability.GetAbilityDescription(), ability.GetAbilityPortrait());
+        }
     }
 
     /// <summary>
@@ -88,6 +109,6 @@ public class EntityHUDModel : MonoBehaviour
         RefreshLabel();
         //RefreshPortrait();
         RefreshLives();
-        //RefreshAbilities();
+        RefreshAbilities();
     }
 }

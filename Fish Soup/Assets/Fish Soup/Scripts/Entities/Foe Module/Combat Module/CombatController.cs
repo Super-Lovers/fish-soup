@@ -9,6 +9,9 @@ public class CombatController : ICombatController
     [SerializeField]
     private int damage = 0;
 
+    /// <summary>
+    /// The abilities listed here will be given to this entity's abilities controller.
+    /// </summary>
     [SerializeField]
     private List<AbilityModel> abilities = new List<AbilityModel>();
 
@@ -35,6 +38,7 @@ public class CombatController : ICombatController
         if (abilitiesController == null)
         {
             abilitiesController = new AbilitiesController();
+            abilitiesController.SetAbilities(abilities);
         }
 
         return abilitiesController;

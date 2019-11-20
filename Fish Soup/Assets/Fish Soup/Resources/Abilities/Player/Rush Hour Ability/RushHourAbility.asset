@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8059beb46bfa07c49bc5b2583debeeff, type: 3}
   m_Name: RushHourAbility
   m_EditorClassIdentifier: 
-  name: Rush Hour
+  abilityPortrait: {fileID: 21300000, guid: c98ca299a09ed1b4ba7b04cb64e5d46e, type: 3}
+  abilityName: Drown
+  abilityDescription: Drown allows Ashley to instantaneously commit die by drowning.
   isCastable: 0
   animationName: RushHourAnimation
   particles: {fileID: 6039238206652134337, guid: 80a5d653b266ee2498d280494bb4d0c2,
