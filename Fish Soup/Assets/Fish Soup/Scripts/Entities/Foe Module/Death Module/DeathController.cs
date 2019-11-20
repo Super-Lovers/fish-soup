@@ -4,6 +4,6 @@
     {
         FoePropertiesController foeProperties = (FoePropertiesController)entity.GetProperties();
 
-        UnityEngine.Debug.Log(foeProperties.GetLabel() + " has fallen!");
+        LogController.LogMessage(foeProperties.GetLabel() + " has fallen!");
     }
 }

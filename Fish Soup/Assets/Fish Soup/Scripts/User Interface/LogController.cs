@@ -13,7 +13,7 @@ public class LogController : MonoBehaviour
 
     private void Awake()
     {
-        gameSettingsConfig = new GameSettingsModel();
+        gameSettingsConfig = ScriptableObject.CreateInstance("GameSettingsModel") as GameSettingsModel;
         gameSettingsConfig.DebugMode = gameSettingsModel.DebugMode;
 
         Toggle(gameSettingsConfig.DebugMode);

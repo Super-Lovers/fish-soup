@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d984f659c37544caec1f12922527f6, type: 3}
   m_Name: Default Game Settings Model
   m_EditorClassIdentifier: 
-  DebugMode: 0
+  DebugMode: 1

@@ -16,6 +16,7 @@ MonoBehaviour:
   abilityName: Drown
   abilityDescription: Drown allows Ashley to instantaneously commit die by drowning.
   isCastable: 0
+  castKey: 106
   animationName: RushHourAnimation
   particles: {fileID: 6039238206652134337, guid: 80a5d653b266ee2498d280494bb4d0c2,
     type: 3}
