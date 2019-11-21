@@ -6,6 +6,7 @@
 <div align="center" style="text-align:center">
   <img style="display:inline-block" src="https://img.shields.io/badge/platforms-windows%20%7C%20macos%20%7C%20linux-lightgrey" />
   <img style="display:inline-block" src="https://img.shields.io/badge/status-active-success" />
+  <img style="display:inline-block" src="https://img.shields.io/badge/language-c%23-blue" />
 </div>
 
 ---
