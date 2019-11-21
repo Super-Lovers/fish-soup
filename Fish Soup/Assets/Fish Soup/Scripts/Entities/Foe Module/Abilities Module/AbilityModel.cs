@@ -11,6 +11,7 @@ public class AbilityModel : ScriptableObject
     [Space(10)]
     [SerializeField] private bool isCastable = false;
     [SerializeField] private KeyCode castKey = KeyCode.None;
+    [SerializeField] private float cooldown = 1;
 
     /// <summary>
     /// [Optional] An animation that will be played when the ability is casted. Animations must NOT loop.
@@ -41,6 +42,11 @@ public class AbilityModel : ScriptableObject
     public bool GetCastable()
     {
         return isCastable;
+    }
+
+    public float GetCooldown()
+    {
+        return cooldown;
     }
 
     public GameObject GetParticles()

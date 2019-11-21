@@ -111,4 +111,14 @@ public class EntityHUDModel : MonoBehaviour
         RefreshLives();
         RefreshAbilities();
     }
+
+    public GameObject GetAbilitiesContainer()
+    {
+        return abilitiesContainer;
+    }
+
+    public EntityModel GetEntity()
+    {
+        return EntityToDisplay;
+    }
 }

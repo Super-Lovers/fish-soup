@@ -1,15 +1,39 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilitiesController
+public class AbilitiesController : MonoBehaviour
 {
     private List<AbilityModel> abilities = new List<AbilityModel>();
+
+    private EntityHUDModel entityHUDModel = null;
+    private AbilitySlotModel abilitySlot = null;
+
+    private void Start()
+    {
+        entityHUDModel = FindObjectOfType<EntityHUDModel>();
+    }
 
     /// <summary>
     ///  Cast the given ability based on the entity model given. Entity model is necessary because you might have two abilities with the same name but different mechanics/entites it is based on.
     /// </summary>
     public bool Cast(AbilityModel ability, EntityModel entity)
     {
+        if (entityHUDModel == null)
+        {
+            entityHUDModel = FindObjectOfType<EntityHUDModel>();
+        }
+
+        if (abilitySlot != null && abilitySlot.GetCooldown() > 0)
+        {
+            LogController.LogMessage(string.Format(
+                "Cannot cast <color=blue>{0}</color> because it is in cooldown for <color=teal>{1}</color> more seconds.",
+                ability.GetAbilityName(),
+                abilitySlot.GetCooldown()
+                ));
+
+            return false;
+        }
+
         if (ability.GetCastable() == true)
         {
             LogController.LogMessage(string.Format(
@@ -38,6 +62,21 @@ public class AbilitiesController
         }
 
         GameObject.Instantiate(ability.GetParticles(), entity.transform.position, Quaternion.identity);
+
+        if (entityHUDModel.GetEntity() == entity)
+        {
+            AbilitySlotModel[] slots = entityHUDModel.GetAbilitiesContainer().GetComponentsInChildren<AbilitySlotModel>();
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i].GetAbilityName() == ability.GetAbilityName())
+                {
+                    abilitySlot = slots[i];
+                    slots[i].Cooldown(ability.GetCooldown());
+                    break;
+                }
+            }
+        }
 
         return true;
     }
