@@ -22,7 +22,7 @@ MonoBehaviour:
     docsId: 1y9yfY7tnGnPMaS2cSdSa8n94wN8rjYsGiA2kRS_6Znk
     sheetId: 1229126311
     format: 1
-    textAsset: {fileID: 0}
+    textAsset: {fileID: 4900000, guid: fa3b139b6f3fb8e4690d98e027db55c0, type: 3}
     downloadOnStart: 0
   inputFiles:
   - textAsset: {fileID: 4900000, guid: fa3b139b6f3fb8e4690d98e027db55c0, type: 3}
