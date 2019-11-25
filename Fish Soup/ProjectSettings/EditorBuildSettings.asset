@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Fish Soup/Scenes/Playground/Level_1_Playground.unity
+    guid: 25362ff3c9aa46145bca15356656b265
   m_configObjects: {}

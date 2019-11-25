@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class LevelGenerator
 {
     private static GameObject levelPrefab = null;
     private static LevelGridView levelGrid = null;
     private static Dictionary<string, List<GameObject>> biomeLibraries = new Dictionary<string, List<GameObject>>();
+    private static List<GameObject> propsLibrary = new List<GameObject>();
 
     private static int initialChildCount = 0;
     private static Transform oceanFloorContainer = null;
@@ -15,6 +17,7 @@ public class LevelGenerator
     [MenuItem("Level Generator/Generate Level")]
     public static void GenerateGrid()
     {
+        LoadPropsLibrary();
         LoadBiomeLibraries();
 
         levelGrid =
@@ -57,6 +60,58 @@ public class LevelGenerator
 
             positionOfTile.z = 0;
             positionOfTile.x += levelGrid.levelSettings.tileSize.x;
+        }
+    }
+
+    private static void LoadPropsLibrary()
+    {
+        Object[] prefabs = Resources.LoadAll("Prefabs/Props/Structural");
+
+        foreach (Object obj in prefabs)
+        {
+            propsLibrary.Add((GameObject)obj);
+        }
+    }
+
+    private static GameObject GenerateRandomProp(List<string> propsFilter)
+    {
+        List<GameObject> allowedProps = new List<GameObject>();
+
+        foreach (string prop in propsFilter)
+        {
+            string pattern = string.Empty;
+            for (int i = 0; i < prop.Length; i++)
+            {
+                if (i == prop.Length)
+                {
+                    pattern += "[1-9]";
+                }
+                else
+                {
+                    pattern += string.Format("[{0}]", prop[i]);
+                }
+            }
+
+            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+
+            foreach (GameObject obj in propsLibrary)
+            {
+                if (regex.IsMatch(obj.name) == false)
+                {
+                    allowedProps.Add(obj);
+                }
+            }
+        }
+
+        if (allowedProps.Count <= 0)
+        {
+            throw new System.Exception("Not a single prop was selected from the props library, please make sure any of the filters you used do not prevent ALL of the props from matching.");
+        }
+        else
+        {
+            GameObject newProp = GameObject.Instantiate(allowedProps[Random.Range(0, allowedProps.Count)]);
+
+            return newProp;
         }
     }
 
@@ -175,6 +230,31 @@ public class LevelGenerator
             tileObj = GameObject.Instantiate(tileObj, GameObject.Find(tileAssetName + "s").transform);
 
             tileObj.transform.position = position;
+
+            List<string> tilesToFilter = new List<string>()
+                {
+                    "Water(Clone)"
+                };
+
+            if (tilesToFilter.Contains(tileObj.name) == false)
+            {
+                if (Random.Range(0, 100) > 60)
+                {
+                    GameObject newProp = GenerateRandomProp(new 
+                        List<string>()
+                        {
+                            "Bigrock"
+                        });
+
+                    newProp.transform.position = Vector3.zero;
+                    newProp.transform.SetParent(tileObj.transform);
+                    newProp.transform.position = new Vector3(
+                        tileObj.transform.position.x,
+                        tileObj.transform.position.y,
+                        tileObj.transform.position.z
+                        );
+                }
+            }
         }
     }
 
@@ -189,7 +269,8 @@ public class LevelGenerator
 
         foreach (GameObject obj in children)
         {
-            GameObject.DestroyImmediate(obj);
+            // DestroyImmediate is dangerous, test this code first
+            //GameObject.DestroyImmediate(obj);
         }
     }
 
