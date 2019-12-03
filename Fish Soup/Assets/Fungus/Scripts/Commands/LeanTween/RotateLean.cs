@@ -70,10 +70,5 @@ namespace Fungus
             else
                 return LeanTween.rotate(_targetObject.Value, rot, _duration);
         }
-
-        public override bool HasReference(Variable variable)
-        {
-            return variable == _toTransform.transformRef || _toRotation.vector3Ref == variable || base.HasReference(variable);
-        }
     }
 }

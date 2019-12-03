@@ -4,20 +4,18 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Fungus
-{
+namespace Fungus {
     /// <summary>
     /// Detects mouse clicks and touches on a Game Object, and sends an event to all Flowchart event handlers in the scene.
     /// The Game Object must have a Collider or Collider2D component attached.
     /// Use in conjunction with the ObjectClicked Flowchart event handler.
     /// </summary>
-    public class Clickable2D : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
-    {
-        [Tooltip("Adjusts distance from player for it to be interactable")]
-        [SerializeField] protected float clickableRadius = 2.5f;
+    public class Clickable2D : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
+        [Tooltip("Maximum distance to player clickable blabal")]
+        [SerializeField] private float clickableRadius = 2.5f;
 
         [Tooltip("Is object clicking enabled")]
-        [SerializeField] protected bool clickEnabled = true;
+        [SerializeField] public bool InteractionEnabled = true;
 
         [Tooltip("Mouse texture to use when hovering mouse over object")]
         [SerializeField] protected Texture2D hoverCursor;
@@ -25,81 +23,60 @@ namespace Fungus
         [Tooltip("Use the UI Event System to check for clicks. Clicks that hit an overlapping UI object will be ignored. Camera must have a PhysicsRaycaster component, or a Physics2DRaycaster for 2D colliders.")]
         [SerializeField] protected bool useEventSystem;
 
-        private PlayerController player = null;
-
-        private void Start()
-        {
-            player = FindObjectOfType<PlayerController>();
-        }
-
-        protected virtual void ChangeCursor(Texture2D cursorTexture)
-        {
-            if (!clickEnabled)
-            {
+        protected virtual void ChangeCursor(Texture2D cursorTexture) {
+            if (!InteractionEnabled) {
                 return;
             }
 
             Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         }
 
-        private float DistanceFromPlayer()
-        {
-            player = FindObjectOfType<PlayerController>();
-            if (player != null)
-            {
-                return Vector3.Distance(player.transform.position, transform.position);
-            }
-            else
-            {
-                return 0;
-            }
-        }
+        protected virtual void DoPointerClick() {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            var playercontroller = player.GetComponent<PlayerController>();
 
-        protected virtual void DoPointerClick()
-        {
-            if (!clickEnabled || DistanceFromPlayer() > clickableRadius)
-            {
+            // If the player is in range and not already interacting with something, the player enters dialogue
+            if (Vector2.Distance(transform.position, player.transform.position) < clickableRadius) {
+                InteractionEnabled = true;
+
+                // Initiate dialogue
+                var eventDispatcher = FungusManager.Instance.EventDispatcher;
+                eventDispatcher.Raise(new ObjectClicked.ObjectClickedEvent(this));
+            }
+            else {
+                InteractionEnabled = false;
                 return;
             }
-
-            var eventDispatcher = FungusManager.Instance.EventDispatcher;
-
-            eventDispatcher.Raise(new ObjectClicked.ObjectClickedEvent(this));
         }
 
-        protected virtual void DoPointerEnter()
-        {
+        protected virtual void DoPointerEnter() {
             ChangeCursor(hoverCursor);
         }
 
-        protected virtual void DoPointerExit()
-        {
+        protected virtual void DoPointerExit() {
             // Always reset the mouse cursor to be on the safe side
             SetMouseCursor.ResetMouseCursor();
         }
 
         #region Legacy OnMouseX methods
 
-        protected virtual void OnMouseDown()
-        {
-            if (!useEventSystem)
-            {
+
+
+        protected virtual void OnMouseDown() {
+
+            if (!useEventSystem) {
                 DoPointerClick();
             }
         }
 
-        protected virtual void OnMouseEnter()
-        {
-            if (!useEventSystem)
-            {
+        protected virtual void OnMouseEnter() {
+            if (!useEventSystem) {
                 DoPointerEnter();
             }
         }
 
-        protected virtual void OnMouseExit()
-        {
-            if (!useEventSystem)
-            {
+        protected virtual void OnMouseExit() {
+            if (!useEventSystem) {
                 DoPointerExit();
             }
         }
@@ -111,16 +88,14 @@ namespace Fungus
         /// <summary>
         /// Is object clicking enabled.
         /// </summary>
-        public bool ClickEnabled { set { clickEnabled = value; } }
+        public bool ClickEnabled { set { InteractionEnabled = value; } }
 
         #endregion
 
         #region IPointerClickHandler implementation
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (useEventSystem)
-            {
+        public void OnPointerClick(PointerEventData eventData) {
+            if (useEventSystem) {
                 DoPointerClick();
             }
         }
@@ -129,10 +104,8 @@ namespace Fungus
 
         #region IPointerEnterHandler implementation
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            if (useEventSystem)
-            {
+        public void OnPointerEnter(PointerEventData eventData) {
+            if (useEventSystem) {
                 DoPointerEnter();
             }
         }
@@ -141,26 +114,16 @@ namespace Fungus
 
         #region IPointerExitHandler implementation
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            if (useEventSystem)
-            {
+        public void OnPointerExit(PointerEventData eventData) {
+            if (useEventSystem) {
                 DoPointerExit();
             }
         }
 
         #endregion
 
-        private void OnDrawGizmos()
-        {
-            if (DistanceFromPlayer() < clickableRadius)
-            {
-                Gizmos.color = Color.blue;
-            }
-            else
-            {
-                Gizmos.color = Color.red;
-            }
+        private void OnDrawGizmosSelected() {
+            Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(transform.position, clickableRadius);
         }
     }

@@ -40,7 +40,17 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return mode.ToString() + " " + base.GetSummary();
+            switch (mode)
+            {
+                case Mode.Base10:
+                    return "Log Base 10";
+                case Mode.Natural:
+                    return "Natural Log";
+                default:
+                    break;
+            }
+
+            return "Log";
         }
     }
 }

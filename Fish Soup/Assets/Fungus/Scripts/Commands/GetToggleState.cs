@@ -54,12 +54,6 @@ namespace Fungus
             return toggle.name;
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return toggleState == variable || 
-                base.HasReference(variable);
-        }
-
         #endregion
     }
 }

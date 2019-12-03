@@ -83,11 +83,6 @@ using UnityEngine.Serialization;
             return new Color32(128, 200, 200, 255);
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return variable == _SettingsString.stringRef;
-        }
-
         #endregion
 
         #region Backwards compatibility

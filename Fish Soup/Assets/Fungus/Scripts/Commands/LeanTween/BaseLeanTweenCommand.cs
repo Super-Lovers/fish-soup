@@ -110,11 +110,6 @@ namespace Fungus
             return new Color32(233, 163, 180, 255);
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return variable == _targetObject.gameObjectRef || variable == _duration.floatRef;
-        }
-
         #endregion
 
     }

@@ -22,7 +22,8 @@ namespace Fungus
             Sin,
             Tan
         }
-        
+
+
         [Tooltip("Trigonometric function to run.")]
         [SerializeField]
         protected Function function = Function.Sin;
@@ -64,7 +65,13 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return function.ToString() + " " + base.GetSummary();
+            return function.ToString();
         }
+
+        public override Color GetButtonColor()
+        {
+            return new Color32(235, 191, 217, 255);
+        }
+
     }
 }

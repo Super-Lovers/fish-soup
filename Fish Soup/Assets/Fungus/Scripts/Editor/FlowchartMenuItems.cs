@@ -58,8 +58,8 @@ namespace Fungus.EditorUtils
                 return null;
             }
 
-            GameObject go = GameObject.Instantiate(prefab) as GameObject;
-            go.name = prefab.name;
+            GameObject go = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+            PrefabUtility.DisconnectPrefabInstance(go);
 
             SceneView view = SceneView.lastActiveSceneView;
             if (view != null)

@@ -44,7 +44,7 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return function.ToString() + " " + base.GetSummary();
+            return function.ToString();
         }
     }
 }

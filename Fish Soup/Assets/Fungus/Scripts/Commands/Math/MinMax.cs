@@ -43,24 +43,19 @@ namespace Fungus
                     break;
             }
 
+
             Continue();
         }
 
         public override string GetSummary()
         {
-            return function.ToString() + " " +
-                "out: " + (outValue.floatRef != null ? outValue.floatRef.Key : outValue.Value.ToString()) +
-                " [" + inLHSValue.Value.ToString() + " - " + inRHSValue.Value.ToString() + "]";
-        }
-
-        public override bool HasReference(Variable variable)
-        {
-            return inLHSValue.floatRef == variable || inRHSValue.floatRef == variable || outValue.floatRef == variable;
+            return function.ToString();
         }
 
         public override Color GetButtonColor()
         {
             return new Color32(235, 191, 217, 255);
         }
+
     }
 }

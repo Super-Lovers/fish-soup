@@ -40,13 +40,6 @@ namespace Fungus
                 newRangeLower.Value.ToString() + "-" + newRangeUpper.Value.ToString() + "]";
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return initialRangeLower.floatRef == variable || initialRangeUpper.floatRef == variable || value.floatRef == variable ||
-                   newRangeLower.floatRef == variable || newRangeUpper.floatRef == variable ||
-                   outValue.floatRef == variable;
-        }
-
         public override Color GetButtonColor()
         {
             return new Color32(235, 191, 217, 255);

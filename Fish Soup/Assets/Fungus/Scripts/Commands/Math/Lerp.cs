@@ -54,12 +54,6 @@ namespace Fungus
             return mode.ToString() + " [" + a.Value.ToString() + "-" + b.Value.ToString() + "]";
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return a.floatRef == variable || b.floatRef == variable || percentage.floatRef == variable ||
-                   outValue.floatRef == variable;
-        }
-
         public override Color GetButtonColor()
         {
             return new Color32(235, 191, 217, 255);

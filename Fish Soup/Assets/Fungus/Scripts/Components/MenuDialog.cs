@@ -227,13 +227,17 @@ namespace Fungus
         /// <param name="interactable">If false, the option is displayed but is not selectable.</param>
         /// <param name="hideOption">If true, the option is not displayed but the menu knows that option can or did exist</param>
         /// <param name="targetBlock">Block to execute when the option is selected.</param>
-        public virtual bool AddOption(string text, bool interactable, bool hideOption, Block targetBlock)
+        public virtual bool AddOption(string text, bool interactable, bool hideOption, Block targetBlock, string textId=null)
         {
             var block = targetBlock;
             UnityEngine.Events.UnityAction action = delegate
             {
                 EventSystem.current.SetSelectedGameObject(null);
                 StopAllCoroutines();
+                //Analytics:
+                if (textId!=null && textId!="")
+                {
+                }
                 // Stop timeout
                 Clear();
                 HideSayDialog();
@@ -315,16 +319,13 @@ namespace Fungus
             {
                 EventSystem.current.SetSelectedGameObject(button.gameObject);
             }
-
-            TextAdapter textAdapter = new TextAdapter();
-            textAdapter.InitFromGameObject(button.gameObject, true);
-            if (textAdapter.HasTextObject())
+            Text textComponent = button.GetComponentInChildren<Text>();
+            if (textComponent != null)
             {
                 text = TextVariationHandler.SelectVariations(text);
 
-                textAdapter.Text = text;
+                textComponent.text = text;
             }
-
             button.onClick.AddListener(action);
             
             return true;

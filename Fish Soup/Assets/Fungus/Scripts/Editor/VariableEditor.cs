@@ -12,10 +12,8 @@ namespace Fungus.EditorUtils
     [CustomEditor (typeof(Variable), true)]
     public class VariableEditor : CommandEditor
     {
-        public override void OnEnable()
+        protected virtual void OnEnable()
         {
-            base.OnEnable();
-
             Variable t = target as Variable;
             t.hideFlags = HideFlags.HideInInspector;
         }
@@ -107,7 +105,7 @@ namespace Fungus.EditorUtils
                         }
                     }
 
-                    variableKeys.Add(fs.name + "/" + v.Key);
+                    variableKeys.Add(fs.name + " / " + v.Key);
                     variableObjects.Add(v);
 
                     index++;
@@ -211,15 +209,13 @@ namespace Fungus.EditorUtils
                 return;
             }
 
-            var origLabel = new GUIContent(label);
-
             if (EditorGUI.GetPropertyHeight(valueProp, label) > EditorGUIUtility.singleLineHeight)
             {
-                DrawMultiLineProperty(position, origLabel, referenceProp, valueProp, flowchart);
+                DrawMultiLineProperty(position, label, referenceProp, valueProp, flowchart);
             }
             else
             {
-                DrawSingleLineProperty(position, origLabel, referenceProp, valueProp, flowchart);
+                DrawSingleLineProperty(position, label, referenceProp, valueProp, flowchart);
             }
 
             EditorGUI.EndProperty();

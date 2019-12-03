@@ -2,6 +2,8 @@
 // It is released for free under the MIT open source license (https://github.com/snozbot/fungus/blob/master/LICENSE)
 
 using UnityEngine;
+using System.Collections.Generic;
+using Polyglot;
 
 namespace Fungus
 {
@@ -15,8 +17,13 @@ namespace Fungus
     public class Say : Command, ILocalizable
     {
         // Removed this tooltip as users's reported it obscures the text box
-        [TextArea(5,10)]
+        [TextArea(5, 10)]
         [SerializeField] protected string storyText = "";
+
+        [TextArea(1, 1)]
+        [SerializeField] protected string polyglotTextId = "";
+
+        [SerializeField] public List<string> genericTextIds = new List<string>();
 
         [Tooltip("Notes about this story text for other authors, localization, etc.")]
         [SerializeField] protected string description = "";
@@ -57,6 +64,7 @@ namespace Fungus
         [SerializeField] protected SayDialog setSayDialog;
 
         protected int executionCount;
+        protected int genericSayIndex;
 
         #region Public members
 
@@ -107,10 +115,35 @@ namespace Fungus
 
             sayDialog.SetActive(true);
 
+            if (flowchart._Character != null && this.character == null) {
+                character = flowchart._Character;
+            }
+            if (flowchart._Portrait != null && this.portrait == null) {
+                portrait = flowchart._Portrait;
+            }
+
             sayDialog.SetCharacter(character);
             sayDialog.SetCharacterImage(portrait);
 
-            string displayText = storyText;
+            string displayText = "";
+            if(polyglotTextId != "")
+            {
+                displayText = Polyglot.Localization.Get(polyglotTextId);
+            }
+            else if(genericTextIds.Count != 0)
+            {
+                if(genericTextIds.Count <= genericSayIndex)
+                {
+                    genericSayIndex = 0;
+                }
+                displayText = Polyglot.Localization.Get(genericTextIds[genericSayIndex]);
+                genericSayIndex++;
+            }
+            else
+            {
+                displayText = storyText;
+            }
+                        
 
             var activeCustomTags = CustomTag.activeCustomTags;
             for (int i = 0; i < activeCustomTags.Count; i++)
@@ -141,7 +174,13 @@ namespace Fungus
             {
                 namePrefix = "EXTEND" + ": ";
             }
-            return namePrefix + "\"" + storyText + "\"";
+
+            if (storyText == null || storyText.Length == 0) {
+                var localizedText = Polyglot.Localization.Get(polyglotTextId);
+                return namePrefix + "\"" + localizedText + "\"";
+            } else {
+                return namePrefix + "\"" + storyText + "\"";
+            }
         }
 
         public override Color GetButtonColor()
@@ -152,6 +191,7 @@ namespace Fungus
         public override void OnReset()
         {
             executionCount = 0;
+            genericSayIndex = 0;
         }
 
         public override void OnStopExecuting()

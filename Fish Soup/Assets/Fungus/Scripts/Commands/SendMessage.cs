@@ -84,11 +84,6 @@ namespace Fungus
             return new Color32(235, 191, 217, 255);
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return _message.stringRef == variable || base.HasReference(variable);
-        }
-
         #endregion
 
         #region Backwards compatibility

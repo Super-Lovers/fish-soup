@@ -22,8 +22,6 @@ namespace Fungus
 
         [Tooltip("A scrollable text field used for displaying conversation history.")]
         [SerializeField] protected ScrollRect narrativeLogView;
-
-        protected TextAdapter narLogViewtextAdapter = new TextAdapter();
         
         [Tooltip("The CanvasGroup containing the save menu buttons")]
         [SerializeField] protected CanvasGroup narrativeLogMenuGroup;
@@ -59,8 +57,6 @@ namespace Fungus
                 logView.SetActive(false);
                 this.enabled = false;
             }
-
-            narLogViewtextAdapter.InitFromGameObject(narrativeLogView.gameObject, true);
         }
 
         protected virtual void Start()
@@ -130,8 +126,11 @@ namespace Fungus
         {
             if (narrativeLogView.enabled)
             {
-                narLogViewtextAdapter.Text = FungusManager.Instance.NarrativeLog.GetPrettyHistory();
-                
+                var historyText = narrativeLogView.GetComponentInChildren<Text>();
+                if (historyText != null)
+                {
+                    historyText.text = FungusManager.Instance.NarrativeLog.GetPrettyHistory();
+                }
                 Canvas.ForceUpdateCanvases();
                 narrativeLogView.verticalNormalizedPosition = 0f;
                 Canvas.ForceUpdateCanvases();

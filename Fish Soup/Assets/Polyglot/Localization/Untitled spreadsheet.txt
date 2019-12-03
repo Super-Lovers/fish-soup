@@ -4,5 +4,9 @@ LANGUAGE_EN	[LanguageName] in english	English	French	Spanish	German	Italian 	Por
 LANGUAGE_DIRECTION	ltr or rtl (text direction used by game code)	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr	rtl	rtl	ltr
 																													
 Polyglot	100																												
-QUEST_1_OBJECTIVE_1		Everything's alright... AH~ Okabe is so kind... Ah~ 																											
-QUEST_1_OBJECTIVE_2		I-I'm... fi-Ah~ fine... so mean, I don't want him to hate me!																											
+QUEST_1_OBJECTIVE_1		I'm sorry, I didn't know. He told me you were in the past																											
+QUEST_1_OBJECTIVE_2		I've been checking you out.																											
+QUEST_2_OBJECTIVE_1		Oh yeah, you really told him, didn't you?																											
+QUEST_2_OBJECTIVE_2		How, exactly, did you think that having an affair would help our marriage?																											
+QUEST_3_OBJECTIVE_1		I've been waiting a long time for you.																											
+QUEST_3_OBJECTIVE_2		Tell me what you saw, for her sake!																											

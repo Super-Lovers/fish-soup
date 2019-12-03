@@ -16,11 +16,8 @@ namespace Fungus
         {
             // Have we loaded the prefs yet
             private static bool prefsLoaded = false;
-            const string HIDE_MUSH_KEY = "hideMushroomInHierarchy";
-            const string USE_EXP_MENUS = "useExperimentalMenus";
 
             public static bool hideMushroomInHierarchy;
-            public static bool useExperimentalMenus;
 
             static FungusEditorPreferences()
             {
@@ -39,20 +36,17 @@ namespace Fungus
 
                 // Preferences GUI
                 hideMushroomInHierarchy = EditorGUILayout.Toggle("Hide Mushroom Flowchart Icon", hideMushroomInHierarchy);
-                useExperimentalMenus = EditorGUILayout.Toggle(new GUIContent("Experimental Searchable Menus", "Experimental menus replace the Event, Add Variable and Add Command menus with a searchable menu more like the Unity AddComponent menu."), useExperimentalMenus);
 
                 // Save the preferences
                 if (GUI.changed)
                 {
-                    EditorPrefs.SetBool(HIDE_MUSH_KEY, hideMushroomInHierarchy);
-                    EditorPrefs.SetBool(USE_EXP_MENUS, useExperimentalMenus);
+                    EditorPrefs.SetBool("hideMushroomInHierarchy", hideMushroomInHierarchy);
                 }
             }
 
             public static void LoadOnScriptLoad()
             {
-                hideMushroomInHierarchy = EditorPrefs.GetBool(HIDE_MUSH_KEY, false);
-                useExperimentalMenus = EditorPrefs.GetBool(USE_EXP_MENUS, false);
+                hideMushroomInHierarchy = EditorPrefs.GetBool("hideMushroomInHierarchy", false);
                 prefsLoaded = true;
             }
         }

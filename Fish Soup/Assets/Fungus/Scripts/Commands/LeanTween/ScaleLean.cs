@@ -42,10 +42,5 @@ namespace Fungus
 
             return LeanTween.scale(_targetObject.Value, sc, _duration);
         }
-        
-        public override bool HasReference(Variable variable)
-        {
-            return variable == _toTransform.transformRef || _toScale.vector3Ref == variable || base.HasReference(variable);
-        }
     }
 }

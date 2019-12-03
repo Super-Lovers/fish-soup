@@ -25,6 +25,9 @@ namespace Fungus
         [Tooltip("GameObject containing the component method to be invoked")]
         [SerializeField] protected GameObject targetObject;
 
+        [Tooltip("GameObject containing the component method to be invoked")]
+        [SerializeField] protected string targetObjectString;
+
         [HideInInspector]
         [Tooltip("Name of assembly containing the target component")]
         [SerializeField] protected string targetComponentAssemblyName;
@@ -76,6 +79,10 @@ namespace Fungus
 
         protected virtual void Awake()
         {
+            if(targetObject == null) {
+                targetObject = GameObject.Find(targetObjectString);
+            }
+
             if (componentType == null)
             {
                 componentType = ReflectionHelper.GetType(targetComponentAssemblyName);

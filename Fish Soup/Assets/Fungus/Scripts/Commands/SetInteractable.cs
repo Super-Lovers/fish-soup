@@ -101,11 +101,6 @@ namespace Fungus
             return false;
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return interactableState.booleanRef == variable || base.HasReference(variable);
-        }
-
         #endregion
     }
 }

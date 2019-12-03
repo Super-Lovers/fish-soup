@@ -72,6 +72,8 @@ namespace Fungus.EditorUtils
         protected SerializedProperty characterProp;
         protected SerializedProperty portraitProp;
         protected SerializedProperty storyTextProp;
+        protected SerializedProperty polyglotTextIdProp;
+        protected SerializedProperty genericTextIdProp;
         protected SerializedProperty descriptionProp;
         protected SerializedProperty voiceOverClipProp;
         protected SerializedProperty showAlwaysProp;
@@ -83,13 +85,16 @@ namespace Fungus.EditorUtils
         protected SerializedProperty setSayDialogProp;
         protected SerializedProperty waitForVOProp;
 
-        public override void OnEnable()
+        protected virtual void OnEnable()
         {
-            base.OnEnable();
+            if (NullTargetCheck()) // Check for an orphaned editor instance
+                return;
 
             characterProp = serializedObject.FindProperty("character");
             portraitProp = serializedObject.FindProperty("portrait");
             storyTextProp = serializedObject.FindProperty("storyText");
+            polyglotTextIdProp = serializedObject.FindProperty("polyglotTextId");
+            genericTextIdProp = serializedObject.FindProperty("genericTextIds");
             descriptionProp = serializedObject.FindProperty("description");
             voiceOverClipProp = serializedObject.FindProperty("voiceOverClip");
             showAlwaysProp = serializedObject.FindProperty("showAlways");
@@ -154,6 +159,19 @@ namespace Fungus.EditorUtils
             
             EditorGUILayout.PropertyField(storyTextProp);
 
+            EditorGUILayout.PropertyField(polyglotTextIdProp);
+
+            EditorGUILayout.LabelField("LocalizedText", EditorStyles.boldLabel);
+
+            if (Polyglot.Localization.KeyExist(polyglotTextIdProp.stringValue)) {
+                var localizedText = Polyglot.Localization.Get(polyglotTextIdProp.stringValue);
+                EditorGUILayout.SelectableLabel(localizedText, EditorStyles.textArea);
+            } else {
+                EditorGUILayout.SelectableLabel("Localization key does not exist!", EditorStyles.textArea);
+            }
+            
+            EditorGUILayout.PropertyField(genericTextIdProp, true);
+            
             EditorGUILayout.PropertyField(descriptionProp);
 
             EditorGUILayout.BeginHorizontal();

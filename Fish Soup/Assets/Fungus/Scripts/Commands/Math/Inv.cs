@@ -19,5 +19,10 @@ namespace Fungus
 
             Continue();
         }
+
+        public override string GetSummary()
+        {
+            return "Inverse 1/f";
+        }
     }
 }

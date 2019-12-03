@@ -30,10 +30,5 @@ namespace Fungus
             }
             return outVar.Key;
         }
-
-        public override bool HasReference(Variable variable)
-        {
-            return outVar == variable;
-        }
     }
 }

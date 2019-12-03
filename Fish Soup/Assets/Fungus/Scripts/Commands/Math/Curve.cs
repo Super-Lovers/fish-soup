@@ -20,5 +20,10 @@ namespace Fungus
 
             Continue();
         }
+
+        public override string GetSummary()
+        {
+            return "Curve";
+        }
     }
 }

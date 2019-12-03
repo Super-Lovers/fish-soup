@@ -560,7 +560,7 @@ namespace Fungus
             Init();
 
             // Instantiate the regular expression object.
-            Regex r = new Regex(Flowchart.SubstituteVariableRegexString);
+            Regex r = new Regex("{\\$.*?}");
 
             bool modified = false;
 

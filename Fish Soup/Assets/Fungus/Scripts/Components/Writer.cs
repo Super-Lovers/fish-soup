@@ -65,7 +65,11 @@ namespace Fungus
 
         protected float currentWritingSpeed;
         protected float currentPunctuationPause;
-        protected TextAdapter textAdapter = new TextAdapter();
+        protected Text textUI;
+        protected InputField inputField;
+        protected TextMesh textMesh;
+        protected Component textComponent;
+        protected PropertyInfo textProperty;
 
         protected bool boldActive = false;
         protected bool italicActive = false;
@@ -99,7 +103,25 @@ namespace Fungus
                 go = gameObject;
             }
 
-            textAdapter.InitFromGameObject(go);
+            textUI = go.GetComponent<Text>();
+            inputField = go.GetComponent<InputField>();
+            textMesh = go.GetComponent<TextMesh>();
+
+            // Try to find any component with a text property
+            if (textUI == null && inputField == null && textMesh == null)
+            {
+                var allcomponents = go.GetComponents<Component>();
+                for (int i = 0; i < allcomponents.Length; i++)
+                {
+                    var c = allcomponents[i];
+                    textProperty = c.GetType().GetProperty("text");
+                    if (textProperty != null)
+                    {
+                        textComponent = c;
+                        break;
+                    }
+                }
+            }
 
             // Cache the list of child writer listeners
             var allComponents = GetComponentsInChildren<Component>();
@@ -128,7 +150,17 @@ namespace Fungus
         {
             if (forceRichText)
             {
-                textAdapter.ForceRichText();
+                if (textUI != null)
+                {
+                    textUI.supportRichText = true;
+                }
+
+                // Input Field does not support rich text
+
+                if (textMesh != null)
+                {
+                    textMesh.richText = true;
+                }
             }
         }
         
@@ -136,7 +168,7 @@ namespace Fungus
         {
             openString.Length = 0;
             
-            if (textAdapter.SupportsRichText())
+            if (SupportsRichText())
             {
                 if (sizeActive)
                 {
@@ -165,7 +197,7 @@ namespace Fungus
         {
             closeString.Length = 0;
             
-            if (textAdapter.SupportsRichText())
+            if (SupportsRichText())
             {
                 if (italicActive)
                 {
@@ -330,7 +362,7 @@ namespace Fungus
                     break;
                     
                 case TokenType.Clear:
-                        textAdapter.Text = "";
+                    Text = "";
                     break;
                     
                 case TokenType.SpeedStart:
@@ -486,9 +518,9 @@ namespace Fungus
             // Start with the visible portion of any existing displayed text.
             string startText = "";
             if (visibleCharacterCount > 0 &&
-                visibleCharacterCount <= textAdapter.Text.Length)
+                visibleCharacterCount <= Text.Length)
             {
-                startText = textAdapter.Text.Substring(0, visibleCharacterCount);
+                startText = Text.Substring(0, visibleCharacterCount);
             }
                 
             UpdateOpenMarkup();
@@ -512,7 +544,7 @@ namespace Fungus
 
                 PartitionString(writeWholeWords, param, i);
                 ConcatenateString(startText);
-                textAdapter.Text = outputString.ToString();
+                Text = outputString.ToString();
 
                 NotifyGlyph();
 
@@ -594,7 +626,7 @@ namespace Fungus
             visibleCharacterCount = outputString.Length;
 
             // Make right hand side text hidden
-            if (textAdapter.SupportsRichText() &&
+            if (SupportsRichText() &&
                 rightString.Length + readAheadString.Length > 0)
             {
                 // Ensure the hidden color strings are populated
@@ -675,7 +707,7 @@ namespace Fungus
 
             if (clear)
             {
-                textAdapter.Text = "";
+                textUI.text = "";
             }
 
             NotifyResume();
@@ -797,6 +829,54 @@ namespace Fungus
         #region Public members
 
         /// <summary>
+        /// Gets or sets the text property of the attached text object.
+        /// </summary>
+        public virtual string Text
+        {
+            get 
+            {
+                if (textUI != null)
+                {
+                    return textUI.text;
+                }
+                else if (inputField != null)
+                {
+                    return inputField.text;
+                }
+                else if (textMesh != null)
+                {
+                    return textMesh.text;
+                }
+                else if (textProperty != null)
+                {
+                    return textProperty.GetValue(textComponent, null) as string;
+                }
+
+                return "";
+            }
+
+            set 
+            {
+                if (textUI != null)
+                {
+                    textUI.text = value;
+                }
+                else if (inputField != null)
+                {
+                    inputField.text = value;
+                }
+                else if (textMesh != null)
+                {
+                    textMesh.text = value;
+                }
+                else if (textProperty != null)
+                {
+                    textProperty.SetValue(textComponent, value, null);
+                }
+            }
+        }
+
+        /// <summary>
         /// This property is true when the writer is writing text or waiting (i.e. still processing tokens).
         /// </summary>
         public virtual bool IsWriting { get { return isWriting; } }
@@ -836,11 +916,11 @@ namespace Fungus
         {
             if (clear)
             {
-                textAdapter.Text = "";
+                this.Text = "";
                 visibleCharacterCount = 0;
             }
 
-            if (!textAdapter.HasTextObject())
+            if (!HasTextObject())
             {
                 yield break;
             }
@@ -868,17 +948,83 @@ namespace Fungus
             yield return StartCoroutine(ProcessTokens(tokens, stopAudio, onComplete));
         }
 
-        public void SetTextColor(Color textColor)
+        /// <summary>
+        /// Sets the color property of the text UI object.
+        /// </summary>
+        public virtual void SetTextColor(Color textColor)
         {
-            textAdapter.SetTextColor(textColor);
+            if (textUI != null)
+            {
+                textUI.color = textColor;
+            }
+            else if (inputField != null)
+            {
+                if (inputField.textComponent != null)
+                {
+                    inputField.textComponent.color = textColor;
+                }
+            }
+            else if (textMesh != null)
+            {
+                textMesh.color = textColor;
+            }
         }
 
-        public void SetTextAlpha(float textAlpha)
+        /// <summary>
+        /// Sets the alpha component of the color property of the text UI object.
+        /// </summary>
+        public virtual void SetTextAlpha(float textAlpha)
         {
-            textAdapter.SetTextAlpha(textAlpha);
+            if (textUI != null)
+            {
+                Color tempColor = textUI.color;
+                tempColor.a = textAlpha;
+                textUI.color = tempColor;
+            }
+            else if (inputField != null)
+            {
+                if (inputField.textComponent != null)
+                {
+                    Color tempColor = inputField.textComponent.color;
+                    tempColor.a = textAlpha;
+                    inputField.textComponent.color = tempColor;
+                }
+            }
+            else if (textMesh != null)
+            {
+                Color tempColor = textMesh.color;
+                tempColor.a = textAlpha;
+                textMesh.color = tempColor;
+            }
         }
 
+        /// <summary>
+        /// Returns true if there is a supported text object attached to this writer.
+        /// </summary>
+        public virtual bool HasTextObject()
+        {
+            return (textUI != null || inputField != null || textMesh != null || textComponent != null);
+        }
 
+        /// <summary>
+        /// Returns true if the text object has rich text support.
+        /// </summary>
+        public virtual bool SupportsRichText()
+        {
+            if (textUI != null)
+            {
+                return textUI.supportRichText;
+            }
+            if (inputField != null)
+            {
+                return false;
+            }
+            if (textMesh != null)
+            {
+                return textMesh.richText;
+            }
+            return false;
+        }
 
         #endregion
 

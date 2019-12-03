@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
+using Polyglot;
 
 namespace Fungus
 {
@@ -19,6 +20,11 @@ namespace Fungus
         [Tooltip("Text to display on the menu button")]
         [TextArea()]
         [SerializeField] protected string text = "Option Text";
+
+        [Tooltip("Text to display on the menu button")]
+        [TextArea()]
+        [SerializeField] protected string polyglotTextId = "";
+        
 
         [Tooltip("Notes about the option text for other authors, localization, etc.")]
         [SerializeField] protected string description = "";
@@ -59,9 +65,21 @@ namespace Fungus
                     menuDialog.SetActive(true);
 
                     var flowchart = GetFlowchart();
-                    string displayText = flowchart.SubstituteVariables(text);
 
-                    menuDialog.AddOption(displayText, interactable, hideOption, targetBlock);
+
+
+                string displayText = "";
+                if (polyglotTextId != "")
+                {
+                    displayText = flowchart.SubstituteVariables(Polyglot.Localization.Get(polyglotTextId));
+                }
+                else
+                {
+                    displayText = flowchart.SubstituteVariables(text);
+                }
+               
+
+                    menuDialog.AddOption(displayText, interactable, hideOption, targetBlock, polyglotTextId);
                 }
             
             Continue();
@@ -95,12 +113,6 @@ namespace Fungus
             return new Color32(184, 210, 235, 255);
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return interactable.booleanRef == variable || hideThisOption.booleanRef == variable ||
-                base.HasReference(variable);
-        }
-
         #endregion
 
         #region ILocalizable implementation
@@ -127,18 +139,5 @@ namespace Fungus
         }
 
         #endregion
-
-        #region Editor caches
-#if UNITY_EDITOR
-        protected override void RefreshVariableCache()
-        {
-            base.RefreshVariableCache();
-
-            var f = GetFlowchart();
-
-            f.DetermineSubstituteVariables(text, referencedVariables);
-        }
-#endif
-        #endregion Editor caches
     }
 }

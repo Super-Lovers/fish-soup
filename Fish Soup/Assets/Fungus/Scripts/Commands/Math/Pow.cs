@@ -27,10 +27,7 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            if (outValue.floatRef == null)
-                return "Error: No out value selected";
-
-            return outValue.floatRef.Key + " = " + baseValue.Value.ToString() + "^" + exponentValue.Value.ToString();
+            return "Pow";
         }
 
         public override Color GetButtonColor()
@@ -38,10 +35,5 @@ namespace Fungus
             return new Color32(235, 191, 217, 255);
         }
 
-        public override bool HasReference(Variable variable)
-        {
-            return baseValue.floatRef == variable || exponentValue.floatRef == variable ||
-                   outValue.floatRef == variable;
-        }
     }
 }

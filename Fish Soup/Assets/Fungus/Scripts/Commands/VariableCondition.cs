@@ -87,84 +87,82 @@ namespace Fungus
 
             bool condition = false;
 
-            var t = variable.GetType();
-
-            if (t == typeof(BooleanVariable))
+            if (variable.GetType() == typeof(BooleanVariable))
             {
                 BooleanVariable booleanVariable = (variable as BooleanVariable);
                 condition = booleanVariable.Evaluate(compareOperator, booleanData.Value);
             }
-            else if (t == typeof(IntegerVariable))
+            else if (variable.GetType() == typeof(IntegerVariable))
             {
                 IntegerVariable integerVariable = (variable as IntegerVariable);
                 condition = integerVariable.Evaluate(compareOperator, integerData.Value);
             }
-            else if (t == typeof(FloatVariable))
+            else if (variable.GetType() == typeof(FloatVariable))
             {
                 FloatVariable floatVariable = (variable as FloatVariable);
                 condition = floatVariable.Evaluate(compareOperator, floatData.Value);
             }
-            else if (t == typeof(StringVariable))
+            else if (variable.GetType() == typeof(StringVariable))
             {
                 StringVariable stringVariable = (variable as StringVariable);
                 condition = stringVariable.Evaluate(compareOperator, stringData.Value);
             }
-            else if (t == typeof(AnimatorVariable))
+            else if (variable.GetType() == typeof(AnimatorVariable))
             {
                 AnimatorVariable animatorVariable = (variable as AnimatorVariable);
                 condition = animatorVariable.Evaluate(compareOperator, animatorData.Value);
             }
-            else if (t == typeof(AudioSourceVariable))
+            else if (variable.GetType() == typeof(AudioSourceVariable))
             {
                 AudioSourceVariable audioSourceVariable = (variable as AudioSourceVariable);
                 condition = audioSourceVariable.Evaluate(compareOperator, audioSourceData.Value);
             }
-            else if (t == typeof(ColorVariable))
+            else if (variable.GetType() == typeof(ColorVariable))
             {
                 ColorVariable colorVariable = (variable as ColorVariable);
                 condition = colorVariable.Evaluate(compareOperator, colorData.Value);
             }
-            else if (t == typeof(GameObjectVariable))
+            else if (variable.GetType() == typeof(GameObjectVariable))
             {
                 GameObjectVariable gameObjectVariable = (variable as GameObjectVariable);
                 condition = gameObjectVariable.Evaluate(compareOperator, gameObjectData.Value);
             }
-            else if (t == typeof(MaterialVariable))
+            else if (variable.GetType() == typeof(MaterialVariable))
             {
                 MaterialVariable materialVariable = (variable as MaterialVariable);
                 condition = materialVariable.Evaluate(compareOperator, materialData.Value);
             }
-            else if (t == typeof(ObjectVariable))
+            else if (variable.GetType() == typeof(ObjectVariable))
             {
                 ObjectVariable objectVariable = (variable as ObjectVariable);
                 condition = objectVariable.Evaluate(compareOperator, objectData.Value);
             }
-            else if (t == typeof(Rigidbody2DVariable))
+            else if (variable.GetType() == typeof(Rigidbody2DVariable))
             {
                 Rigidbody2DVariable rigidbody2DVariable = (variable as Rigidbody2DVariable);
                 condition = rigidbody2DVariable.Evaluate(compareOperator, rigidbody2DData.Value);
             }
-            else if (t == typeof(SpriteVariable))
+            else if (variable.GetType() == typeof(SpriteVariable))
             {
                 SpriteVariable spriteVariable = (variable as SpriteVariable);
                 condition = spriteVariable.Evaluate(compareOperator, spriteData.Value);
             }
-            else if (t == typeof(TextureVariable))
+            else if (variable.GetType() == typeof(TextureVariable))
             {
                 TextureVariable textureVariable = (variable as TextureVariable);
                 condition = textureVariable.Evaluate(compareOperator, textureData.Value);
             }
-            else if (t == typeof(TransformVariable))
+            else if (variable.GetType() == typeof(TransformVariable))
             {
                 TransformVariable transformVariable = (variable as TransformVariable);
                 condition = transformVariable.Evaluate(compareOperator, transformData.Value);
             }
-            else if (t == typeof(Vector2Variable))
+            else if (variable.GetType() == typeof(Vector2Variable))
             {
                 Vector2Variable vector2Variable = (variable as Vector2Variable);
                 condition = vector2Variable.Evaluate(compareOperator, vector2Data.Value);
             }
-            else if (t == typeof(Vector3Variable))
+            else if (variable.GetType() == typeof(Vector3Variable))
             {
                 Vector3Variable vector3Variable = (variable as Vector3Variable);
                 condition = vector3Variable.Evaluate(compareOperator, vector3Data.Value);
@@ -211,72 +209,70 @@ namespace Fungus
                 return "Error: No variable selected";
             }
 
-            var t = variable.GetType();
-
             string summary = variable.Key + " ";
             summary += Condition.GetOperatorDescription(compareOperator) + " ";
 
-            if (t == typeof(BooleanVariable))
+            if (variable.GetType() == typeof(BooleanVariable))
             {
                 summary += booleanData.GetDescription();
             }
-            else if (t == typeof(IntegerVariable))
+            else if (variable.GetType() == typeof(IntegerVariable))
             {
                 summary += integerData.GetDescription();
             }
-            else if (t == typeof(FloatVariable))
+            else if (variable.GetType() == typeof(FloatVariable))
             {
                 summary += floatData.GetDescription();
             }
-            else if (t == typeof(StringVariable))
+            else if (variable.GetType() == typeof(StringVariable))
             {
                 summary += stringData.GetDescription();
             }
-            else if (t == typeof(AnimatorVariable))
+            else if (variable.GetType() == typeof(AnimatorVariable))
             {
                 summary += animatorData.GetDescription();
             }
-            else if (t == typeof(AudioSourceVariable))
+            else if (variable.GetType() == typeof(AudioSourceVariable))
             {
                 summary += audioSourceData.GetDescription();
             }
-            else if (t == typeof(ColorVariable))
+            else if (variable.GetType() == typeof(ColorVariable))
             {
                 summary += colorData.GetDescription();
             }
-            else if (t == typeof(GameObjectVariable))
+            else if (variable.GetType() == typeof(GameObjectVariable))
             {
                 summary += gameObjectData.GetDescription();
             }
-            else if (t == typeof(MaterialVariable))
+            else if (variable.GetType() == typeof(MaterialVariable))
             {
                 summary += materialData.GetDescription();
             }
-            else if (t == typeof(ObjectVariable))
+            else if (variable.GetType() == typeof(ObjectVariable))
             {
                 summary += objectData.GetDescription();
             }
-            else if (t == typeof(Rigidbody2DVariable))
+            else if (variable.GetType() == typeof(Rigidbody2DVariable))
             {
                 summary += rigidbody2DData.GetDescription();
             }
-            else if (t == typeof(SpriteVariable))
+            else if (variable.GetType() == typeof(SpriteVariable))
             {
                 summary += spriteData.GetDescription();
             }
-            else if (t == typeof(TextureVariable))
+            else if (variable.GetType() == typeof(TextureVariable))
             {
                 summary += textureData.GetDescription();
             }
-            else if (t == typeof(TransformVariable))
+            else if (variable.GetType() == typeof(TransformVariable))
             {
                 summary += transformData.GetDescription();
             }
-            else if (t == typeof(Vector2Variable))
+            else if (variable.GetType() == typeof(Vector2Variable))
             {
                 summary += vector2Data.GetDescription();
             }
-            else if (t == typeof(Vector3Variable))
+            else if (variable.GetType() == typeof(Vector3Variable))
             {
                 summary += vector3Data.GetDescription();
             }
@@ -286,77 +282,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            bool retval = (variable == this.variable) || base.HasReference(variable);
-
-            var t = variable.GetType();
-
-            //this is a nightmare
-            if (t == typeof(BooleanVariable))
-            {
-                retval |= booleanData.booleanRef == variable;
-            }
-            else if (t == typeof(IntegerVariable))
-            {
-                retval |= integerData.integerRef == variable;
-            }
-            else if (t == typeof(FloatVariable))
-            {
-                retval |= floatData.floatRef == variable;
-            }
-            else if (t == typeof(StringVariable))
-            {
-                retval |= stringData.stringRef == variable;
-            }
-            else if (t == typeof(AnimatorVariable))
-            {
-                retval |= animatorData.animatorRef == variable;
-            }
-            else if (t == typeof(AudioSourceVariable))
-            {
-                retval |= audioSourceData.audioSourceRef == variable;
-            }
-            else if (t == typeof(ColorVariable))
-            {
-                retval |= colorData.colorRef == variable;
-            }
-            else if (t == typeof(GameObjectVariable))
-            {
-                retval |= gameObjectData.gameObjectRef == variable;
-            }
-            else if (t == typeof(MaterialVariable))
-            {
-                retval |= materialData.materialRef == variable;
-            }
-            else if (t == typeof(ObjectVariable))
-            {
-                retval |= objectData.objectRef == variable;
-            }
-            else if (t == typeof(Rigidbody2DVariable))
-            {
-                retval |= rigidbody2DData.rigidbody2DRef == variable;
-            }
-            else if (t == typeof(SpriteVariable))
-            {
-                retval |= spriteData.spriteRef == variable;
-            }
-            else if (t == typeof(TextureVariable))
-            {
-                retval |= textureData.textureRef == variable;
-            }
-            else if (t == typeof(TransformVariable))
-            {
-                retval |= transformData.transformRef == variable;
-            }
-            else if (t == typeof(Vector2Variable))
-            {
-                retval |= vector2Data.vector2Ref == variable;
-            }
-            else if (t == typeof(Vector3Variable))
-            {
-                retval |= vector3Data.vector3Ref == variable;
-            }
-
-            return retval;
+            return (variable == this.variable);
         }
 
         public override Color GetButtonColor()
