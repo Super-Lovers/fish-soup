@@ -37,8 +37,7 @@ public class CombatController : ICombatController
         // this can't work for me using ZenJect.
         if (abilitiesController == null)
         {
-            abilitiesController = new AbilitiesController();
-            abilitiesController.SetAbilities(abilities);
+            abilitiesController = new AbilitiesController(abilities);
         }
 
         return abilitiesController;

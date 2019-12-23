@@ -1,6 +1,6 @@
 ﻿public enum State
 {
-    Idle,
+    Idling,
     Moving,
-    Battle
+    Battling
 }

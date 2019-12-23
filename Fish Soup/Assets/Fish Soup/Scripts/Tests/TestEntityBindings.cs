@@ -252,7 +252,7 @@ public class TestFoeEntityStateMachineBehaviour : ZenjectUnitTestFixture
 
         SharkEntity shark = factory.Create();
         State sharkState = shark.GetStateMachine().GetState();
-        Assert.AreEqual(State.Idle, sharkState);
+        Assert.AreEqual(State.Idling, sharkState);
     }
 
     [Test]
@@ -261,8 +261,8 @@ public class TestFoeEntityStateMachineBehaviour : ZenjectUnitTestFixture
         SharkEntity.Factory factory = Container.Resolve<SharkEntity.Factory>();
 
         SharkEntity shark = factory.Create();
-        shark.GetStateMachine().SetState(State.Battle);
+        shark.GetStateMachine().SetState(State.Battling);
 
-        Assert.AreEqual(State.Battle, shark.GetStateMachine().GetState());
+        Assert.AreEqual(State.Battling, shark.GetStateMachine().GetState());
     }
 }

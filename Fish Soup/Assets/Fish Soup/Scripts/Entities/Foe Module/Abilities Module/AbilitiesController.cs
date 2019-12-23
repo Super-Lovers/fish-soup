@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilitiesController : MonoBehaviour
+public class AbilitiesController
 {
     private List<AbilityModel> abilities = new List<AbilityModel>();
 
@@ -10,7 +10,12 @@ public class AbilitiesController : MonoBehaviour
 
     private void Start()
     {
-        entityHUDModel = FindObjectOfType<EntityHUDModel>();
+        entityHUDModel = GameObject.FindObjectOfType<EntityHUDModel>();
+    }
+
+    public AbilitiesController(List<AbilityModel> abilities)
+    {
+        this.abilities = abilities;
     }
 
     /// <summary>
@@ -20,7 +25,7 @@ public class AbilitiesController : MonoBehaviour
     {
         if (entityHUDModel == null)
         {
-            entityHUDModel = FindObjectOfType<EntityHUDModel>();
+            entityHUDModel = GameObject.FindObjectOfType<EntityHUDModel>();
         }
 
         if (abilitySlot != null && abilitySlot.GetCooldown() > 0)

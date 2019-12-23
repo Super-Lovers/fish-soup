@@ -1,7 +1,7 @@
 ﻿[System.Serializable]
 public class StateMachineController : IStateMachine
 {
-    private State state = State.Idle;
+    private State state = State.Idling;
 
     public State GetState()
     {
